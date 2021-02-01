@@ -1,0 +1,5 @@
+/* host 会作用于整个组件
+:host{
+    display:flex;
+    justify-content: center;
+} */
