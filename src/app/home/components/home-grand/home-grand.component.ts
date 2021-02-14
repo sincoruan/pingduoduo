@@ -1,4 +1,5 @@
-import { Component, Injectable, Injector, OnInit } from '@angular/core';
+import { Component, Injectable, InjectionToken, Injector, OnInit } from '@angular/core';
+import { token } from '../../services';
 //@Injectable()
 class Product{
   //一个声明干了两件事：1>添加了成员变量 2>构造函数增加了这个参数
@@ -28,6 +29,7 @@ export class HomeGrandComponent implements OnInit {
   ngOnInit() {
     this.date = this.minusDays(new Date(),1);
     this.price = 1234.5678;
+    
     const injector = Injector.create({
       providers:[
         {
@@ -42,12 +44,17 @@ export class HomeGrandComponent implements OnInit {
           provide: PurchaseOrder,
           useClass: PurchaseOrder,
           deps:[Product]
+        },
+        {
+          provide:token,
+          useValue:'http://localhost'
         }
       ]
     });
     console.log(injector.get(Product));
     console.log(injector.get(PurchaseOrder));
-    
+    console.log(injector.get(token));
+
   }
 
   minusDays(date:Date,days:number){
