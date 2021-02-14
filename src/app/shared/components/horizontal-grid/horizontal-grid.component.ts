@@ -14,24 +14,28 @@ export interface Channel{
 })
 export class HorizontalGridComponent implements OnInit {
 
-
-  channels: Channel[] =[
-    {
-      id:1,
-      icon:'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png',
-      title:'discount1',
-      link:'hot1'
-    },
-    {
-      id:2,
-      icon:'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-contact-512.png',
-      title:'discount2',
-      link:'hot2'
-    }
-  ];
+  @Input() cols = 8;
+  @Input() displayCols = 5;
+  sliderMargin = '0';
   constructor() { }
 
   ngOnInit() {
   }
+  public get scrollable(): boolean {
+    return this.cols > this.displayCols;
+  }
 
+  public get templateRows(): string {
+    return `minmax(auto, max-content)`;
+  }
+
+  public get templateColumns(): string {
+    return `repeat(${this.cols}, calc((100vw - ${this.displayCols *
+      0.4}rem) / ${this.displayCols}))`;
+  }
+
+  public handleScroll(ev) {
+    this.sliderMargin = `0 ${(100 * ev.target.scrollLeft) /
+      ev.target.scrollWidth}%`;
+  }
 }

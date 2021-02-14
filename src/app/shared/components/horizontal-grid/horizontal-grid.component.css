@@ -1,5 +1,18 @@
-/* host 会作用于整个组件
-:host{
+/* host 会作用于整个组件 */
+/* :host{
     display:flex;
-    justify-content: center;
+    overflow-x: auto;
 } */
+.container{
+    background-color: white;
+    padding: 5px 0;
+    overflow-x: auto; /*横轴可滚动*/
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    display: grid;
+    place-content: stretch;
+    place-items: center;
+    grid-gap: 0.42rem;
+    grid-auto-flow: row;
+}

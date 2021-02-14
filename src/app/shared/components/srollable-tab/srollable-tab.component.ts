@@ -1,6 +1,7 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 export interface TopMenu{
+  id:number,
   title: string;
   readonly link?: string;
 }
