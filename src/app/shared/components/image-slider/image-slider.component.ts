@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 
 export interface ImageSlider{
   imgUrl:string;
@@ -9,7 +9,8 @@ export interface ImageSlider{
 @Component({
   selector: 'app-image-slider',
   templateUrl: './image-slider.component.html',
-  styleUrls: ['./image-slider.component.css']
+  styleUrls: ['./image-slider.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ImageSliderComponent implements OnInit,OnDestroy {
 

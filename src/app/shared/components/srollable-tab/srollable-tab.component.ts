@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 export interface TopMenu{
   id:number,
@@ -9,7 +9,8 @@ export interface TopMenu{
 @Component({
   selector: 'app-srollable-tab',
   templateUrl: './srollable-tab.component.html',
-  styleUrls: ['./srollable-tab.component.css']
+  styleUrls: ['./srollable-tab.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class SrollableTabComponent 
 implements 
