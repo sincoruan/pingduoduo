@@ -30,7 +30,6 @@ export class HomeDetailComponent implements OnInit {
       this.imageSliders = banners;
       this.cd.markForCheck();
     });
-
   }
   @ViewChild(ImageSliderComponent) imgSlider: ImageSliderComponent;
 
