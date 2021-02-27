@@ -11,6 +11,8 @@ export class ParentComponent implements OnInit {
   @ViewChild('inputRef',{static:true}) inputRef:ElementRef;
   constructor() { }
 
+  startDate:Date = new Date(2021,2,27);
+  endDate:Date = new Date(2021,2,28);
   ngOnInit() {
     fromEvent(this.inputRef.nativeElement,'input')
     .subscribe(
