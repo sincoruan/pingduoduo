@@ -21,8 +21,15 @@ export class HomeDetailComponent implements OnInit {
       console.log(this.selectedTabLink);
       this.cd.markForCheck();
     });
-    this.channels=this.homeService.getChannels();
-    this.imageSliders = this.homeService.getImageSliders();
+    this.homeService.getChannels().subscribe(channels => {
+      this.channels=channels;
+      console.log(channels);
+      this.cd.markForCheck();
+    });
+    this.homeService.getBanners().subscribe(banners => {
+      this.imageSliders = banners;
+      this.cd.markForCheck();
+    });
 
   }
   @ViewChild(ImageSliderComponent) imgSlider: ImageSliderComponent;

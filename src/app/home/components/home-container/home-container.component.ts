@@ -24,7 +24,9 @@ export class HomeContainerComponent implements OnInit {
   constructor(private router: Router,private service:HomeService,@Inject(token) private baseUrl :String) { }
 
   ngOnInit() {
-    this.menus = this.service.getTabs();
+    this.service.getTabs().subscribe(tabs => {
+      this.menus = tabs;
+    });
     console.log(this.baseUrl);
   }
 
