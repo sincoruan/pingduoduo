@@ -13,32 +13,14 @@ export class HomeService {
       
     }
     getTabs(){
-        return this.http.get<TopMenu[]>(`${environment.baseUrl}/tabs`,
-        {
-          params:{
-            icode: `${environment.iCode}`
-          }
-        });
+        return this.http.get<TopMenu[]>(`${environment.baseUrl}/tabs`,);
     }
 
     getChannels(){
-        return this.http.get<Channel[]>(`${environment.baseUrl}/channels`
-        ,{
-          params:{
-            icode: `${environment.iCode}`
-          }
-        }
-        );
+        return this.http.get<Channel[]>(`${environment.baseUrl}/channels`);
     }
 
     getBanners(){
-        console.log(`-------------icode:${environment.iCode}`);
-        return this.http.get<ImageSlider[]>(`${environment.baseUrl}/banners`
-        ,{
-          params:{
-            icode: `${environment.iCode}`
-          }
-        }
-        );
+        return this.http.get<ImageSlider[]>(`${environment.baseUrl}/banners`);
     }
 }

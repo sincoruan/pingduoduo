@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { TopMenu } from 'src/app/shared/components';
 import { HomeService, token } from '../../services';
 
@@ -12,7 +13,7 @@ export class HomeContainerComponent implements OnInit {
 
   
   scrollableTabBgColor = 'red';
-  menus: TopMenu[]=[];
+  menus$: Observable<TopMenu[]>;
 
   usernameParent='';
 
@@ -24,9 +25,7 @@ export class HomeContainerComponent implements OnInit {
   constructor(private router: Router,private service:HomeService,@Inject(token) private baseUrl :String) { }
 
   ngOnInit() {
-    this.service.getTabs().subscribe(tabs => {
-      this.menus = tabs;
-    });
+    this.menus$ = this.service.getTabs();
     console.log(this.baseUrl);
   }
 

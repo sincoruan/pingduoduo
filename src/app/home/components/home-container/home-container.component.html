@@ -1,5 +1,5 @@
 <app-srollable-tab 
-    [menus]="menus" 
+    [menus]="menus$|async" 
     [backgroundColor]="scrollableTabBgColor"
     titleColor="#fff"
     activeColor="yellow"

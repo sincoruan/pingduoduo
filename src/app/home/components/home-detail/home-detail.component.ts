@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Channel, ImageSlider, ImageSliderComponent, TopMenu } from 'src/app/shared/components';
 import { HomeService } from '../../services';
 
@@ -14,26 +16,22 @@ export class HomeDetailComponent implements OnInit {
   constructor(private route:ActivatedRoute,private homeService:HomeService,private cd:ChangeDetectorRef) { 
 
   }
-  selectedTabLink
+  //编码习惯，加了$表明它是一个流
+  selectedTabLink$ : Observable<String>;
+
   ngOnInit() {
-    this.route.paramMap.subscribe(params=>{
-      this.selectedTabLink = params.get('tabLink')
-      console.log(this.selectedTabLink);
-      this.cd.markForCheck();
-    });
-    this.homeService.getChannels().subscribe(channels => {
-      this.channels=channels;
-      console.log(channels);
-      this.cd.markForCheck();
-    });
-    this.homeService.getBanners().subscribe(banners => {
-      this.imageSliders = banners;
-      this.cd.markForCheck();
-    });
+
+    this.selectedTabLink$ = this.route.paramMap.pipe(
+      filter(params=>params.has('tabLink')),
+      map(params=>params.get('tabLink'))
+    );
+
+    this.channels$ = this.homeService.getChannels();
+    this.imageSliders$ = this.homeService.getBanners();
   }
   @ViewChild(ImageSliderComponent) imgSlider: ImageSliderComponent;
 
-  channels: Channel[] =[];
-  imageSliders:ImageSlider[]=[];
+  channels$ : Observable<Channel[]>;
+  imageSliders$:Observable<ImageSlider[]>;
 
 }
