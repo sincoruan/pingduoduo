@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule, NotificationInterceptor, ParamInterceptor } from './home';
+import { RecommendModule } from './recommend';
+import { MyModule } from './my/my.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HomeModule, NotificationInterceptor, ParamInterceptor } from './home';
     SharedModule,
     AppRoutingModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    RecommendModule,
+    MyModule
   ],
   providers: [
     {

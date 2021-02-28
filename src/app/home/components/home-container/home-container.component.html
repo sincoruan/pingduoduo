@@ -5,6 +5,7 @@
     activeColor="yellow"
     indicatorColor="yellow"
     (tabSelected)="handleTabSelected($event)"
+    [selectedTabLink]="selectedTabLink$ | async"
 >
 </app-srollable-tab>
 <router-outlet></router-outlet>

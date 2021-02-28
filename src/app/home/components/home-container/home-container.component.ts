@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { TopMenu } from 'src/app/shared/components';
 import { HomeService, token } from '../../services';
 
@@ -15,6 +16,8 @@ export class HomeContainerComponent implements OnInit {
   scrollableTabBgColor = 'red';
   menus$: Observable<TopMenu[]>;
 
+  selectedTabLink$: Observable<string>;
+
   usernameParent='';
 
 
@@ -22,11 +25,13 @@ export class HomeContainerComponent implements OnInit {
     this.router.navigate(['home',menu.link]);
   }
 
-  constructor(private router: Router,private service:HomeService,@Inject(token) private baseUrl :String) { }
+  constructor(private router: Router,private service:HomeService,private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.menus$ = this.service.getTabs();
-    console.log(this.baseUrl);
+    this.selectedTabLink$ = this.route.firstChild.paramMap.pipe(
+      filter(params=>params.has('tabLink')),
+      map(params=>params.get('tabLink'))
+    );
   }
-
 }

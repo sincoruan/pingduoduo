@@ -28,6 +28,7 @@ implements
   @Input() activeColor ='blue';
   @Input() indicatorColor = 'red';
   @Output() tabSelected = new EventEmitter();
+  @Input() selectedTabLink:string;
 
   /** 
    *构造函数永远首先被调用 
@@ -95,10 +96,8 @@ implements
     //console.log("ngOnDestroy....");    
   }
 
-  selectedIndex=-1;
   handleSelection(index:number){
-    this.selectedIndex=index;
-    this.tabSelected.emit(this.menus[this.selectedIndex]);
+    this.tabSelected.emit(this.menus[index]);
   }
 
 }
