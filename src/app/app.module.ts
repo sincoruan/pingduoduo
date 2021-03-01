@@ -9,6 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule, NotificationInterceptor, ParamInterceptor } from './home';
 import { RecommendModule } from './recommend';
 import { MyModule } from './my/my.module';
+import { ProductContainerComponent } from './product';
+import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
+import { ChatModule } from './chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,10 @@ import { MyModule } from './my/my.module';
     HomeModule,
     HttpClientModule,
     RecommendModule,
-    MyModule
+    MyModule,
+    ProductModule,
+    CategoryModule,
+    ChatModule
   ],
   providers: [
     {

@@ -40,6 +40,7 @@ export class AppComponent {
   }
   selectedIndex$: Observable<number>;
   handleTabSelected(tab:TabItem){
+    console.log(`tablink ${tab.link} `);
     this.router.navigate([tab.link]);
   }
 }
