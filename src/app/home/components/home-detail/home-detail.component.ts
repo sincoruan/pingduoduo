@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Channel, ImageSlider, ImageSliderComponent, TopMenu } from 'src/app/shared/components';
+import { Ad } from 'src/app/shared/domain';
 import { HomeService } from '../../services';
 
 @Component({
@@ -17,8 +18,9 @@ export class HomeDetailComponent implements OnInit {
 
   }
   //编码习惯，加了$表明它是一个流
-  selectedTabLink$ : Observable<String>;
-
+  selectedTabLink$ : Observable<string>;
+  ad$: Observable<Ad>;
+  
   ngOnInit() {
 
     this.selectedTabLink$ = this.route.paramMap.pipe(
@@ -28,6 +30,12 @@ export class HomeDetailComponent implements OnInit {
 
     this.channels$ = this.homeService.getChannels();
     this.imageSliders$ = this.homeService.getBanners();
+    //流的重用
+    this.ad$ = this.selectedTabLink$.pipe(
+      switchMap(tab => this.homeService.getAdByTab(tab)),
+      filter(ads => ads.length > 0),
+      map(ads => ads[0])
+    );
   }
   @ViewChild(ImageSliderComponent) imgSlider: ImageSliderComponent;
 
