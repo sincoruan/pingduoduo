@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { Channel, ImageSlider, ImageSliderComponent, TopMenu } from 'src/app/shared/components';
-import { Ad } from 'src/app/shared/domain';
+import { Ad, Product } from 'src/app/shared/domain';
 import { HomeService } from '../../services';
 
 @Component({
@@ -20,7 +20,7 @@ export class HomeDetailComponent implements OnInit {
   //编码习惯，加了$表明它是一个流
   selectedTabLink$ : Observable<string>;
   ad$: Observable<Ad>;
-  
+  products$: Observable<Product[]>;
   ngOnInit() {
 
     this.selectedTabLink$ = this.route.paramMap.pipe(
@@ -35,6 +35,9 @@ export class HomeDetailComponent implements OnInit {
       switchMap(tab => this.homeService.getAdByTab(tab)),
       filter(ads => ads.length > 0),
       map(ads => ads[0])
+    );
+    this.products$ = this.selectedTabLink$.pipe(
+      switchMap(tab => this.homeService.getProductsByTab(tab))
     );
   }
   @ViewChild(ImageSliderComponent) imgSlider: ImageSliderComponent;
