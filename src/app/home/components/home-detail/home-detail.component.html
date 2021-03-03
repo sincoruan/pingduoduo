@@ -19,7 +19,8 @@
 </div>
 
 <app-vertical-grid>
-  <div *ngFor="let product of products$|async">
-    {{product.title}}
-  </div>
+  <app-product-card *ngFor="let product of products$ | async"
+  [product]="product">
+
+  </app-product-card>
 </app-vertical-grid>
