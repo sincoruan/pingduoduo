@@ -6,7 +6,12 @@ import { ProductContainerComponent } from './components';
 const routes: Routes = [
   {
     path:'product',
-    component:ProductContainerComponent
+    children:[
+      {
+        path: ':productId',
+        component: ProductContainerComponent
+      }
+    ]
   }
 ];
 
