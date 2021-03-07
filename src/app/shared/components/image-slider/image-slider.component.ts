@@ -19,7 +19,6 @@ export class ImageSliderComponent implements OnInit,OnDestroy {
   @Input() intervalBySeconds:number =2;
   intervalId;
   constructor(private rd2:Renderer2) {}
-
   @ViewChildren('img') imgs:QueryList<ElementRef>;
 
   @ViewChild('imgSlider',{static:true}) imgSlider:ElementRef;
@@ -35,6 +34,7 @@ export class ImageSliderComponent implements OnInit,OnDestroy {
       this.rd2.setStyle(item.nativeElement,'height','400px');
     });
     let i=0;
+    if(this.intervalBySeconds<=0) return;
     this.intervalId = setInterval(()=>{
       this.rd2.setProperty(
         this.imgSlider.nativeElement,
